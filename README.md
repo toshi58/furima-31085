@@ -23,11 +23,11 @@
 | ------------------- | ---------- | ------------------------------ |
 | name                | string     | null: false                    |
 | info                | text       | null: false                    |
-| category            | string     | null: false                    |
-| product_status      | string     | null: false                    |
-| shipping_fee_status | string     | null: false                    |
-| prefecture          | string     | null: false                    |
-| scheduled_delivery  | string     | null: false                    |
+| category            | integer    | null: false                    |
+| product_status      | integer    | null: false                    |
+| shipping_fee_status | integer    | null: false                    |
+| prefecture          | integer    | null: false                    |
+| scheduled_delivery  | integer    | null: false                    |
 | price               | integer    | null: false                    |
 | user                | references | null: false, foreign_key: true |
 
@@ -53,12 +53,12 @@
 
 | Column       | Type       | Options                        |
 | ------------ | ---------- | ------------------------------ |
-| postal_code  | integer    | null: false                    |
-| prefecture   | string     | null: false                    |
+| postal_code  | string     | null: false                    |
+| prefecture   | integer    | null: false                    |
 | city         | string     | null: false                    |
 | address      | string     | null: false                    |
 | building     | string     |                                |
-| phone_number | integer    | null: false                    |
+| phone_number | string     | null: false                    |
 | order        | references | null: false, foreign_key: true |
 
 - belongs_to :order
