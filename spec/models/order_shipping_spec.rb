@@ -27,13 +27,13 @@ RSpec.describe OrderShipping, type: :model do
       it 'postal_codeにハイフンがないと購入できない' do
         @order_shipping.postal_code = '1234567'
         @order_shipping.valid?
-        expect(@order_shipping.errors.full_messages).to include("Postal code Include hyphen(-)")
+        expect(@order_shipping.errors.full_messages).to include('Postal code Include hyphen(-)')
       end
 
       it 'prefecture_idが1だと購入できない' do
         @order_shipping.prefecture_id = 1
         @order_shipping.valid?
-        expect(@order_shipping.errors.full_messages).to include("Prefecture Select")
+        expect(@order_shipping.errors.full_messages).to include('Prefecture Select')
       end
 
       it 'cityが空だと購入できない' do
@@ -57,13 +57,13 @@ RSpec.describe OrderShipping, type: :model do
       it 'phone_numberが11文字より多いと購入できない' do
         @order_shipping.phone_number = '090123456789'
         @order_shipping.valid?
-        expect(@order_shipping.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
+        expect(@order_shipping.errors.full_messages).to include('Phone number is too long (maximum is 11 characters)')
       end
 
       it 'phone_numberが半角数字以外だと購入できない' do
         @order_shipping.phone_number = '０９０１２３４５６７８'
         @order_shipping.valid?
-        expect(@order_shipping.errors.full_messages).to include("Phone number Input only number")
+        expect(@order_shipping.errors.full_messages).to include('Phone number Input only number')
       end
 
       it 'tokenが空だと購入できない' do

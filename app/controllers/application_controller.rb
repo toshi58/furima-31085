@@ -2,9 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def sold_out_move_to_index
-    if @item.order
-      redirect_to root_path
-    end
+    redirect_to root_path if @item.order
   end
 
   private
