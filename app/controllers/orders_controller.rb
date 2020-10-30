@@ -1,11 +1,12 @@
 class OrdersController < ApplicationController
+  before_action :set_item, only: [:index, :create]
+  before_action :sold_out_move_to_index, only: [:index]
+
   def index
-    @item = Item.find(params[:item_id])
     @order_shipping = OrderShipping.new
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @order_shipping = OrderShipping.new(order_params)
     if @order_shipping.valid?
       pay_item
@@ -29,5 +30,15 @@ class OrdersController < ApplicationController
       card: order_params[:token],
       currency: 'jpy'
     )
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+
+  def sold_out_move_to_index
+    if Order.exists?(item_id: @item.id)
+      redirect_to root_path
+    end
   end
 end
