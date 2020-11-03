@@ -130,10 +130,7 @@
           <li class='list'>
             <%= link_to item_path(item.id) do %>
               <div class='item-img-content'>
-                <% item.images.each do |image| %>
-                  <%= image_tag image, class: "item-img" %>
-                  <% break %>
-                <% end %>
+                <%= image_tag item.images[0], class: "item-img" %>
 
                 <% if item.order %>
                   <div class='sold-out'>
