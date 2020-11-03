@@ -11,7 +11,7 @@ class Item < ApplicationRecord
   has_many_attached :images
 
   with_options presence: true do
-    validates :image
+    validates :images
     validates :name, length: { maximum: 40 }
     validates :info, length: { maximum: 1000 }
     validates :price
