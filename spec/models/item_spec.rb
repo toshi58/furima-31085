@@ -91,10 +91,19 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Price Out of setting range')
       end
 
-      it 'imageが空だと出品できない' do
-        @item.image = nil
+      it 'imagesが空だと出品できない' do
+        @item.images = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Image can't be blank")
+        expect(@item.errors.full_messages).to include("Images can't be blank")
+      end
+
+      it 'imagesが5つ以上だと出品できない' do
+        @item.images.attach(io: File.open('public/images/test_image.png'), filename: 'test_image.png')
+        @item.images.attach(io: File.open('public/images/test_image.png'), filename: 'test_image.png')
+        @item.images.attach(io: File.open('public/images/test_image.png'), filename: 'test_image.png')
+        @item.images.attach(io: File.open('public/images/test_image.png'), filename: 'test_image.png')
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Images is too long (maximum is 4 characters)")
       end
     end
   end
