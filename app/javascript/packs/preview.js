@@ -48,7 +48,9 @@ document.addEventListener('DOMContentLoaded', function() {
       blob = window.URL.createObjectURL(file);
 
       createImageHTML(blob)
-      createWrapperHTML()
+      if(imageElementNum < 3) {
+        createWrapperHTML()
+      }
     });
   };
 
