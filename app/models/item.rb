@@ -8,10 +8,10 @@ class Item < ApplicationRecord
 
   belongs_to :user
   has_one :order
-  has_one_attached :image
+  has_many_attached :images
 
   with_options presence: true do
-    validates :image
+    validates :images, length: { maximum: 4 }
     validates :name, length: { maximum: 40 }
     validates :info, length: { maximum: 1000 }
     validates :price
