@@ -85,6 +85,10 @@
   min-width: 250px;
 }
 
+.upload-wrap {
+  display: flex;
+}
+
 .click-upload>p {
   margin-bottom: 15px;
 }

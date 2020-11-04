@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-  const ImageList = document.getElementById("image-list");
+  const clickUp = document.getElementById("click-up");
 
   const createImageHTML = (blob) => {
     const imageElement = document.createElement('div');
@@ -9,20 +9,46 @@ document.addEventListener('DOMContentLoaded', function() {
     const blobImage = document.createElement('img');
     blobImage.setAttribute('src', blob);
 
+    const imageBox = document.getElementById(`image_box_${imageElementNum}`)
+
+    imageElement.appendChild(blobImage);
+    imageBox.appendChild(imageElement);
+  };
+
+  const createWrapperHTML = () => {
+    let imageElementNum = document.querySelectorAll('.image-element').length
+
+    const uploadWrap = document.createElement('div');
+    uploadWrap.setAttribute('class', 'upload-wrap')
+
+    const box = document.createElement('div')
+
+    const word = document.createElement('p')
+    word.innerHTML = "クリックしてファイルをアップロード"
+
     const inputHTML = document.createElement('input')
-    inputHTML.setAttribute('id', `item_image_${imageElementNum}`)
+    inputHTML.setAttribute('id', `item_image_${imageElementNum - 1}`)
     inputHTML.setAttribute('name', 'item[images][]')
     inputHTML.setAttribute('type', 'file')
 
-    imageElement.appendChild(blobImage);
-    imageElement.appendChild(inputHTML);
-    ImageList.appendChild(imageElement);
+    const addImageBox = document.createElement('div');
+    addImageBox.setAttribute('class', 'img-show')
+    addImageBox.setAttribute('id', `image_box_${imageElementNum}`)
+
+    // 次の画像を入れる場所を追加
+    box.appendChild(word);
+    box.appendChild(inputHTML);
+    uploadWrap.appendChild(box);
+    uploadWrap.appendChild(addImageBox);
+    clickUp.appendChild(uploadWrap);
+    // 次の画像を入れる場所を追加
 
     inputHTML.addEventListener('change', function(e) {
       file = e.target.files[0];
       blob = window.URL.createObjectURL(file);
 
       createImageHTML(blob)
+      createWrapperHTML()
     });
   };
 
@@ -31,5 +57,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const blob = window.URL.createObjectURL(file);
 
     createImageHTML(blob)
+    createWrapperHTML()
   });
 });
